@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pourin-hypnotherapeute.com/sitemap.xml
