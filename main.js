@@ -57,17 +57,3 @@ if (heroBg && motionOK) {
     });
   }, { passive: true });
 }
-
-// Vidéos YouTube : façade légère, l'iframe n'est chargée qu'au clic
-document.querySelectorAll('.video-embed[data-yt]').forEach(box => {
-  const btn = box.querySelector('.video-poster');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    const iframe = document.createElement('iframe');
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + box.dataset.yt + '?autoplay=1&rel=0';
-    iframe.title = btn.getAttribute('aria-label') || 'Vidéo YouTube';
-    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-    iframe.allowFullscreen = true;
-    box.replaceChildren(iframe);
-  });
-});
