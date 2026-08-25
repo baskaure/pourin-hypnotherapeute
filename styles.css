@@ -522,6 +522,11 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
 }
 @media (max-width: 560px) {
   .hero-tag { display: none; }
+  .hero-stats { grid-template-columns: 1fr; }
+  .stat-glass { display: flex; align-items: baseline; gap: .65rem; padding: .7rem 1.1rem; }
+  .stat-glass + .stat-glass { border-left: none; border-top: 1px solid rgba(255, 253, 248, .16); }
+  .stat-glass b { font-size: 1.25rem; flex-shrink: 0; }
+  .stat-glass small { margin-top: 0; }
 }
 
 /* ── Marquee ─────────────────────────────────────────── */
@@ -1320,6 +1325,156 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
 .prose ul { margin: .9rem 0 .9rem 1.2rem; color: var(--ink-soft); }
 .prose li { margin-bottom: .4rem; }
 .prose li::marker { color: var(--coral); }
+
+/* ── Vidéos (façade YouTube, iframe chargée au clic) ── */
+.video-wrap { max-width: 880px; }
+.videos-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 760px) { .videos-2 { grid-template-columns: 1fr; } }
+.video-embed {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: #242618;
+  box-shadow: var(--shadow-soft);
+  isolation: isolate;
+}
+.video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.video-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .94;
+  transition: transform .6s cubic-bezier(.2, .7, .3, 1), opacity .3s ease;
+}
+.video-poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(30, 32, 22, .04), rgba(30, 32, 22, .3));
+}
+.video-poster .play {
+  position: absolute;
+  z-index: 1;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(226, 99, 108, .92);
+  box-shadow: 0 14px 34px -10px rgba(30, 32, 22, .55), 0 0 0 9px rgba(255, 253, 248, .22);
+  transition: transform .3s ease, background .3s ease;
+}
+.video-poster .play::before {
+  content: "";
+  border-left: 21px solid #fff;
+  border-top: 13px solid transparent;
+  border-bottom: 13px solid transparent;
+  margin-left: 6px;
+}
+.video-poster:hover img { transform: scale(1.04); opacity: 1; }
+.video-poster:hover .play { transform: translate(-50%, -50%) scale(1.1); background: var(--coral-deep); }
+.video-caption {
+  margin-top: .9rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+}
+.video-caption::before { content: "✳ "; font-style: normal; color: var(--coral); font-size: .8em; }
+
+/* ── Logos de certification & cartes partenaires ─────── */
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.3rem;
+}
+.card-head .num { margin-bottom: 0; }
+.card-logo {
+  height: 48px;
+  width: auto;
+  max-width: 132px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+.partner-img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line);
+  background: #fff;
+  margin-bottom: 1.2rem;
+}
+.partner-img.is-logo { object-fit: contain; padding: 1.1rem; }
+
+/* ── Carte du cabinet ────────────────────────────────── */
+.map-panel {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  height: clamp(340px, 46vw, 480px);
+  background: var(--paper-warm);
+  box-shadow: var(--shadow);
+  isolation: isolate;
+}
+.map-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 253, 248, .55);
+  pointer-events: none;
+}
+.map-panel iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: saturate(.88) contrast(1.02);
+}
+.map-card {
+  position: absolute;
+  z-index: 1;
+  top: clamp(.8rem, 2vw, 1.4rem);
+  left: clamp(.8rem, 2vw, 1.4rem);
+  max-width: min(300px, calc(100% - 1.6rem));
+  background: rgba(255, 253, 248, .92);
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  border: 1px solid rgba(58, 58, 46, .1);
+  border-radius: var(--r-sm);
+  padding: 1.1rem 1.3rem;
+  box-shadow: var(--shadow-soft);
+}
+.map-card b {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+.map-card p { font-size: .92rem; margin-top: .15rem; }
+.map-card .btn { margin-top: .8rem; padding: .6rem 1.15rem; font-size: .88rem; }
 
 /* ── Révélation au scroll ────────────────────────────── */
 html.js .reveal {
