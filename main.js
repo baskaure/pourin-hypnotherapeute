@@ -57,3 +57,14 @@ if (heroBg && motionOK) {
     });
   }, { passive: true });
 }
+
+// Iframes (YouTube, carte) chargées seulement à l'approche du viewport
+const ioFrames = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.src = e.target.dataset.src;
+      ioFrames.unobserve(e.target);
+    }
+  });
+}, { rootMargin: '600px 0px' });
+document.querySelectorAll('iframe[data-src]').forEach(f => ioFrames.observe(f));

@@ -14,6 +14,7 @@
   --line:       rgba(58, 58, 46, .1);
 
   --coral:      #E2636C;
+  --coral-btn:  #C94853; /* contraste 4,6:1 avec du texte blanc (WCAG AA) */
   --coral-deep: #B03A44;
   --coral-soft: #F9E4DE;
   --coral-light:#FBD9C9;
@@ -40,7 +41,7 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -70,7 +71,7 @@ body::before {
 
 img { max-width: 100%; height: auto; display: block; }
 
-::selection { background: var(--coral); color: #fff; }
+::selection { background: var(--coral-btn); color: #fff; }
 
 h1, h2, h3, .display {
   font-family: var(--font-display);
@@ -146,9 +147,9 @@ section { padding-block: clamp(3.8rem, 9vw, 7rem); }
 }
 .btn:hover::after { transform: translateX(4px); }
 .btn-primary {
-  background: var(--coral);
+  background: var(--coral-btn);
   color: #fff;
-  box-shadow: 0 12px 28px -10px rgba(226, 99, 108, .6);
+  box-shadow: 0 12px 28px -10px rgba(201, 72, 83, .6);
 }
 .btn-primary:hover { background: var(--coral-deep); transform: translateY(-2px); }
 .btn-ghost {
@@ -336,8 +337,8 @@ section { padding-block: clamp(3.8rem, 9vw, 7rem); }
 /* entrée en cascade au chargement */
 .hero-top                       { animation: hero-in .9s cubic-bezier(.2,.7,.3,1) .1s backwards; }
 .hero .hero-urgency             { animation: hero-in .9s cubic-bezier(.2,.7,.3,1) .2s backwards; }
-.hero h1                        { animation: hero-in .9s cubic-bezier(.2,.7,.3,1) .3s backwards; }
-.hero .lead                     { animation: hero-in .9s cubic-bezier(.2,.7,.3,1) .42s backwards; }
+.hero h1                        { animation: hero-in-slide .9s cubic-bezier(.2,.7,.3,1) .3s backwards; }
+.hero .lead                     { animation: hero-in-slide .9s cubic-bezier(.2,.7,.3,1) .42s backwards; }
 .hero .hero-ctas                { animation: hero-in .9s cubic-bezier(.2,.7,.3,1) .54s backwards; }
 .hero .hero-trust               { animation: hero-in .9s cubic-bezier(.2,.7,.3,1) .66s backwards; }
 .hero .hero-stats               { animation: hero-in .9s cubic-bezier(.2,.7,.3,1) .6s backwards; }
@@ -754,7 +755,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   font-weight: 400;
   transition: background .25s ease, color .25s ease, transform .25s ease, border-color .25s ease;
 }
-.care-card .link:hover::after { background: var(--coral); border-color: var(--coral); color: #fff; transform: translateX(4px); }
+.care-card .link:hover::after { background: var(--coral-btn); border-color: var(--coral-btn); color: #fff; transform: translateX(4px); }
 
 /* ── Bande sombre (sauge) ────────────────────────────── */
 .band {
@@ -1025,8 +1026,8 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
 }
 .faq details[open] summary::after {
   transform: rotate(45deg);
-  background: var(--coral);
-  border-color: var(--coral);
+  background: var(--coral-btn);
+  border-color: var(--coral-btn);
   color: #fff;
 }
 .faq details p { padding-top: .9rem; max-width: 62ch; }
@@ -1160,7 +1161,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
 @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
 .site-footer .brand { color: #FBF6EE; }
 .site-footer .brand > span > span { color: rgba(243, 241, 228, .6); }
-.site-footer h4 {
+.site-footer .footer-heading {
   font-family: var(--font-display);
   font-size: 1.05rem;
   font-weight: 560;
@@ -1232,9 +1233,14 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
     var(--paper-warm);
   box-shadow: var(--shadow-soft), inset 0 0 0 1px rgba(255, 253, 248, .65);
 }
+/* h1 et chapeau : glissement sans fondu, pour une peinture immédiate (LCP) */
+@keyframes hero-in-slide {
+  from { transform: translateY(26px); }
+  to   { transform: none; }
+}
 .page-hero .eyebrow      { animation: hero-in .9s cubic-bezier(.2,.7,.3,1) .08s backwards; }
-.page-hero h1            { animation: hero-in .9s cubic-bezier(.2,.7,.3,1) .18s backwards; }
-.page-hero .lead         { animation: hero-in .9s cubic-bezier(.2,.7,.3,1) .3s backwards; }
+.page-hero h1            { animation: hero-in-slide .9s cubic-bezier(.2,.7,.3,1) .12s backwards; }
+.page-hero .lead         { animation: hero-in-slide .9s cubic-bezier(.2,.7,.3,1) .22s backwards; }
 .page-hero .hero-ctas    { animation: hero-in .9s cubic-bezier(.2,.7,.3,1) .42s backwards; }
 .page-hero .hero-figure  { animation: hero-in .9s cubic-bezier(.2,.7,.3,1) .34s backwards; }
 .page-hero::before {
