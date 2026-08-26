@@ -3,16 +3,46 @@ document.documentElement.classList.add('js');
 // Navigation mobile
 const toggle = document.querySelector('.nav-toggle');
 if (toggle) {
-  toggle.addEventListener('click', () => {
-    const open = document.body.classList.toggle('nav-open');
-    toggle.setAttribute('aria-expanded', open);
-  });
-  document.querySelectorAll('.site-nav a').forEach(a =>
-    a.addEventListener('click', () => {
-      document.body.classList.remove('nav-open');
-      toggle.setAttribute('aria-expanded', 'false');
-    })
+  const desktop = window.matchMedia('(min-width: 1021px)');
+  let scrollY = 0;
+
+  const setNav = open => {
+    if (open === document.body.classList.contains('nav-open')) return;
+    if (open) scrollY = window.scrollY;
+    document.body.classList.toggle('nav-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    // overflow:hidden seul ne bloque pas iOS ; on fige le body à sa position
+    if (open) {
+      document.body.style.position = 'fixed';
+      document.body.style.top = -scrollY + 'px';
+      document.body.style.width = '100%';
+    } else {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollY);
+    }
+  };
+
+  toggle.addEventListener('click', () =>
+    setNav(!document.body.classList.contains('nav-open'))
   );
+
+  document.querySelectorAll('.site-nav a').forEach(a =>
+    a.addEventListener('click', () => setNav(false))
+  );
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+      setNav(false);
+      toggle.focus();
+    }
+  });
+
+  // repasser en desktop pendant que le menu est ouvert le laisserait
+  // ouvert et le body figé
+  desktop.addEventListener('change', e => { if (e.matches) setNav(false); });
 }
 
 // État scrollé du header pilule
