@@ -57,3 +57,21 @@ python3 serve.py            # http://localhost:8080 — URLs propres (/tarifs, /
 ```
 
 Images sources dans `input/` (les `.jpg` sont les originaux, les `.webp` les versions servies).
+
+## Deuxième proposition — landing page simple
+
+`lp-2.html` et `lp-2.css` : proposition indépendante, claire et moderne, avec les trois
+agendas Calendly vérifiés sur le site actuel le 11 septembre 2026. La première
+proposition et ses styles restent inchangés.
+
+Les trois boutons ouvrent l'agenda en **popup Calendly** par-dessus la page (widget officiel
+`assets.calendly.com/assets/external/widget.js`), sans quitter le site. Les liens gardent leur
+`href` + `target="_blank"` : si le script Calendly est bloqué, le clic retombe sur l'ouverture
+classique dans un nouvel onglet.
+
+Pour présenter les deux versions avec le serveur local :
+- Première proposition : `http://localhost:8092/`
+- Deuxième proposition : `http://localhost:8092/lp-2`
+
+Lancer `python3 serve.py 8092` depuis ce dossier. La seconde page est en `noindex`
+pendant la comparaison des propositions.
