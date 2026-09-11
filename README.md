@@ -48,6 +48,12 @@ les sert nativement ; sur Netlify, activer « Pretty URLs » (Asset optimization
 - Tarif affiché sans détour (100 €/h) + FAQ objections (peur de l'hypnose, psychologue, remboursement).
 - Parcours EMDR « personnes déjà rencontrées » : Calendly `seance-emdr-avec-claire-pourin`
   (présent sur /tarifs et /contact).
+- **Popup Calendly sur tout le site** : `calendly-popup.js` (chargé par toutes les pages,
+  y compris `lp-2.html`) intercepte les liens `calendly.com` et ouvre l'agenda par-dessus la
+  page via le widget officiel, sans quitter le site. Le script est injecté seulement si la page
+  contient un lien Calendly, et les liens gardent leur `href` + `target="_blank"` : si le widget
+  est bloqué (réseau, bloqueur de scripts) le clic retombe sur l'ouverture en nouvel onglet.
+  Ctrl/Cmd/clic milieu ouvrent toujours un onglet.
 
 ## Local
 
@@ -64,10 +70,6 @@ Images sources dans `input/` (les `.jpg` sont les originaux, les `.webp` les ver
 agendas Calendly vérifiés sur le site actuel le 11 septembre 2026. La première
 proposition et ses styles restent inchangés.
 
-Les trois boutons ouvrent l'agenda en **popup Calendly** par-dessus la page (widget officiel
-`assets.calendly.com/assets/external/widget.js`), sans quitter le site. Les liens gardent leur
-`href` + `target="_blank"` : si le script Calendly est bloqué, le clic retombe sur l'ouverture
-classique dans un nouvel onglet.
 
 Pour présenter les deux versions avec le serveur local :
 - Première proposition : `http://localhost:8092/`

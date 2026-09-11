@@ -11,7 +11,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Manrope:wght@400;500;600;650;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
   <link rel="stylesheet" href="lp-2.css">
 </head>
 <body>
@@ -53,14 +52,6 @@
     <section class="closing wrap"><p>Et si vous vous accordiez<br><span>ce temps pour vous ?</span></p><a class="primary" href="#rendez-vous">Choisir mon rendez-vous <span aria-hidden="true">↗</span></a></section>
   </main>
   <footer class="footer wrap"><div><a class="footer-brand" href="lp-2.html">Claire Pourin</a><p>Hypnothérapeute · Praticienne EMDR · Psychopraticienne</p></div><a href="https://pourin-hypnotherapeute.com/" target="_blank" rel="noopener noreferrer">Le site de Claire <span aria-hidden="true">↗</span></a><p class="professional-note">Claire Pourin n’est pas psychologue et ne fait pas partie du dispositif « Mon soutien psy ».</p></footer>
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-  <script>
-    document.addEventListener('click', function (event) {
-      var link = event.target.closest('a[href*="calendly.com"]');
-      if (!link || !window.Calendly) return;
-      event.preventDefault();
-      window.Calendly.initPopupWidget({ url: link.href });
-    });
-  </script>
+  <script src="calendly-popup.js" defer></script>
 </body>
 </html>

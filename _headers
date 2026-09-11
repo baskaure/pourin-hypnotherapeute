@@ -5,6 +5,8 @@
   Cache-Control: public, max-age=86400
 /main.js
   Cache-Control: public, max-age=86400
+/calendly-popup.js
+  Cache-Control: public, max-age=86400
 
 # Sécurité globale
 /*
