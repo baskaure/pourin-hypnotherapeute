@@ -115,10 +115,26 @@ a { color: var(--coral-deep); text-decoration-thickness: 1px; text-underline-off
   background: rgba(255, 253, 248, .5);
 }
 .eyebrow::before {
-  content: "✳";
+  content: "✳\FE0E";
   color: var(--coral);
   font-size: .85em;
 }
+
+/* ── Icônes SVG (remplacent les anciens emojis) ──────── */
+.icon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  vertical-align: -.14em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* l'astérisque décoratif ferait doublon avec une icône */
+.eyebrow:has(.icon)::before { content: none; }
+.eyebrow .icon { width: 1.1em; height: 1.1em; }
 
 section { padding-block: clamp(3.8rem, 9vw, 7rem); }
 .section-head { max-width: 780px; margin-bottom: clamp(2.2rem, 4.5vw, 3.6rem); }
@@ -608,7 +624,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   color: var(--ink-soft);
   white-space: nowrap;
 }
-.marquee span::after { content: "✳"; font-style: normal; color: var(--coral); font-size: .8em; }
+.marquee span::after { content: "✳\FE0E"; font-style: normal; color: var(--coral); font-size: .8em; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 
@@ -630,7 +646,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   color: var(--ink);
   white-space: nowrap;
 }
-.trustbar b::after { content: "✳"; color: var(--coral); font-size: .45em; vertical-align: super; margin-left: .15em; }
+.trustbar b::after { content: "✳\FE0E"; color: var(--coral); font-size: .45em; vertical-align: super; margin-left: .15em; }
 .trustbar span { font-size: .9rem; color: var(--ink-soft); display: block; margin-top: .3rem; max-width: 22ch; }
 @media (max-width: 720px) {
   .trustbar .wrap { grid-template-columns: 1fr 1fr; }
@@ -698,7 +714,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   text-transform: uppercase;
   color: var(--sage-deep);
 }
-.pain-label::before { content: "✳ "; color: var(--coral); }
+.pain-label::before { content: "✳\FE0E\A0"; color: var(--coral); }
 .pains-more {
   grid-column: 1 / -1;
   display: flex;
@@ -727,7 +743,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
 .chip:hover { transform: translateY(-2px); border-color: rgba(226, 99, 108, .45); box-shadow: var(--shadow-soft); }
-.chip::before { content: "✳ "; color: var(--coral); font-size: .8em; }
+.chip::before { content: "✳\FE0E\A0"; color: var(--coral); font-size: .8em; }
 
 /* ── Cartes accompagnements ──────────────────────────── */
 .cards-3 {
@@ -761,15 +777,17 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
 }
 .care-card:hover::before { opacity: 1; }
 .care-card .num {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   align-self: flex-start;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: .95rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  font-size: 1.15rem;
   color: var(--coral-deep);
   border: 1px solid rgba(226, 99, 108, .4);
   border-radius: 999px;
-  padding: .3rem .9rem;
+  padding: 0;
   margin-bottom: 1.3rem;
 }
 .care-card h3 { margin-bottom: .7rem; position: relative; }
@@ -783,7 +801,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   margin-bottom: .45rem;
 }
 .care-card li::before {
-  content: "✳";
+  content: "✳\FE0E";
   position: absolute;
   left: 0;
   font-size: .75em;
@@ -1009,15 +1027,44 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   transition: transform .3s ease, box-shadow .3s ease;
 }
 .price-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-soft); }
+.price-card .price-title {
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  color: inherit;
+  margin: .55rem 0 0;
+}
 .price-card .price {
   font-family: var(--font-display);
   font-size: clamp(2.6rem, 4vw, 3.4rem);
   font-weight: 480;
-  color: var(--ink);
+  color: inherit;
+  line-height: 1.05;
   margin: .6rem 0 .2rem;
   letter-spacing: -.02em;
 }
-.price-card .price small { font-size: 1rem; font-weight: 400; color: var(--ink-soft); font-family: var(--font-body); }
+.price-card .price small { display: block; font-size: 1rem; font-weight: 400; line-height: 1.6; color: var(--ink-soft); font-family: var(--font-body); }
+.price-card.is-featured .price small { color: rgba(243, 241, 228, .72); }
+.price-card .price-was {
+  font-size: .5em;
+  color: var(--ink-soft);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  margin-right: .25em;
+  font-weight: 400;
+}
+.price-card.is-featured .price-was { color: rgba(243, 241, 228, .6); }
+.price-card .price-note {
+  font-size: .86rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 1rem 0 0;
+}
+.price-card.is-featured .price-note { color: rgba(243, 241, 228, .72); }
+.price-card .price-note a { color: inherit; }
 .price-card.is-featured {
   background:
     radial-gradient(30rem 18rem at 100% 0%, rgba(226, 99, 108, .3), transparent 60%),
@@ -1148,6 +1195,28 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   border-radius: var(--r-md);
   border: 6px solid var(--paper);
   box-shadow: var(--shadow);
+}
+
+/* visuel raccourci (colonne surmontant une carte tarif) */
+.split .visual.is-short img { aspect-ratio: 4 / 3.2; }
+
+/* galerie du cabinet : une vue large + deux vignettes */
+.cabinet-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(.6rem, 1.4vw, 1rem);
+}
+.cabinet-gallery img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow);
+}
+.cabinet-gallery .g-main {
+  grid-column: 1 / -1;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--r-lg);
 }
 
 .infolist { list-style: none; margin-top: 1.4rem; display: grid; gap: .9rem; }
@@ -1420,7 +1489,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   font-size: 1.02rem;
   color: var(--ink-soft);
 }
-.video-caption::before { content: "✳ "; font-style: normal; color: var(--coral); font-size: .8em; }
+.video-caption::before { content: "✳\FE0E\A0"; font-style: normal; color: var(--coral); font-size: .8em; }
 
 /* ── Logos de certification & cartes partenaires ─────── */
 .card-head {
