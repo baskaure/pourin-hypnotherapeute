@@ -149,8 +149,10 @@ Résultat en écrans de scroll sur un iPhone de 390 px :
 
 ## Conversion — choix faits
 
-- 2 CTA partout : **Réserver une séance découverte** (Calendly `votrerendezvous`, paiement CB)
+- 2 CTA partout : **Réserver ma première séance** (Calendly `votrerendezvous`, paiement CB)
   et **Appel gratuit de 15 min** (Calendly `al-proux/60min`, friction minimale).
+  Le libellé « séance découverte » a été retiré partout : il nommait une prestation qui
+  n'existe dans aucune des trois formules et menait au même agenda que les autres.
 - Barre CTA collante en bas d'écran sur mobile.
 - Preuve sociale remontée (badge 5,0/71 avis dans le héro + 6 extraits d'avis).
 - **Offres** (refonte sept. 2026, d'après la stratégie envoyée par Claire) : trois formules par public.
