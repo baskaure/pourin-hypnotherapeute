@@ -5,6 +5,10 @@
   Cache-Control: public, max-age=86400
 /main.js
   Cache-Control: public, max-age=86400
+/home.css
+  Cache-Control: public, max-age=86400
+/home.js
+  Cache-Control: public, max-age=86400
 /calendly-popup.js
   Cache-Control: public, max-age=86400
 

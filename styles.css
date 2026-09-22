@@ -1,7 +1,7 @@
 /* ════════════════════════════════════════════════════════════════
    Claire Pourin — Hypnothérapeute & EMDR à La Rochelle
    UI v2 « sanctuaire immersif » — même DA (papier crème, encre
-   olive, corail, sauge, doré, Fraunces + Karla), design modernisé :
+   olive, corail, sauge, doré, Manrope + DM Sans), design modernisé :
    nav pilule flottante, héro immersif, glassmorphism, typo XXL.
    ════════════════════════════════════════════════════════════════ */
 
@@ -27,8 +27,9 @@
   --glass-border: rgba(255, 253, 248, .5);
   --glass-dark:   rgba(30, 32, 22, .38);
 
-  --font-display: 'Fraunces', 'Georgia', serif;
-  --font-body:    'Karla', 'Segoe UI', sans-serif;
+  /* Typo reprise de la page d'accueil : Manrope pour les titres, DM Sans pour le texte. */
+  --font-display: 'Manrope', 'Segoe UI', sans-serif;
+  --font-body:    'DM Sans', 'Segoe UI', sans-serif;
 
   --r-sm: 16px;
   --r-md: 24px;
@@ -75,20 +76,33 @@ img { max-width: 100%; height: auto; display: block; }
 
 h1, h2, h3, .display {
   font-family: var(--font-display);
-  font-weight: 480;
-  line-height: 1.06;
+  font-weight: 500;
+  line-height: 1.1;
   letter-spacing: -.02em;
   color: var(--ink);
   text-wrap: balance;
 }
-h1 { font-size: clamp(2.6rem, 6vw, 4.5rem); }
-h2 { font-size: clamp(2rem, 4.4vw, 3.2rem); }
-h3 { font-size: 1.35rem; line-height: 1.25; }
+h1, .display { font-size: clamp(2.6rem, 6vw, 4.5rem); letter-spacing: -.042em; }
+h2 { font-size: clamp(2rem, 4.4vw, 3.2rem); letter-spacing: -.035em; }
+h3 { font-size: 1.35rem; line-height: 1.3; letter-spacing: -.015em; }
 
 h1 em, h2 em, .accent-em {
-  font-style: italic;
-  font-weight: 400;
-  color: var(--coral-deep);
+  font-style: normal;
+  font-weight: 500;
+  color: var(--ink);
+  background-image: linear-gradient(transparent 58%, var(--coral-light) 58%, var(--coral-light) 92%, transparent 92%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding-inline: .06em;
+}
+
+/* sur fond sombre, le surlignage clair ne passe pas : on garde l'accent en couleur */
+.hero-bottom h1 em,
+.price-card.is-featured h2 em,
+.price-card.is-featured h3 em,
+.dark h2 em {
+  background-image: none;
+  color: var(--coral-light);
 }
 
 p { color: var(--ink-soft); }
@@ -236,7 +250,7 @@ section { padding-block: clamp(3.8rem, 9vw, 7rem); }
 .brand b {
   font-family: var(--font-display);
   font-size: 1.15rem;
-  font-weight: 560;
+  font-weight: 600;
   letter-spacing: .01em;
 }
 .brand > span > span { display: block; font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
@@ -262,7 +276,17 @@ section { padding-block: clamp(3.8rem, 9vw, 7rem); }
 }
 .site-nav a:not(.btn):hover::after,
 .site-nav a[aria-current="page"]::after { left: 0; right: 0; }
-.site-nav .btn { padding: .68rem 1.35rem; font-size: .92rem; }
+.site-nav .btn { padding: .68rem 1.35rem; font-size: .92rem; white-space: nowrap; }
+
+/* Entre le seuil du burger et la largeur max, les six liens + le bouton ne tiennent
+   plus sur une ligne : la pilule passait sur deux lignes et débordait à droite. */
+@media (min-width: 1021px) and (max-width: 1200px) {
+  .site-header .wrap { gap: .9rem; }
+  .brand > span > span { display: none; }
+  .site-nav { gap: 1rem; }
+  .site-nav a:not(.btn) { font-size: .88rem; }
+  .site-nav .btn { padding: .6rem 1.05rem; font-size: .85rem; }
+}
 
 .nav-toggle {
   display: none;
@@ -436,7 +460,7 @@ section { padding-block: clamp(3.8rem, 9vw, 7rem); }
 }
 .hero-id:hover { background: rgba(255, 253, 248, .28); }
 .hero-id img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,.6); }
-.hero-id b { display: block; font-family: var(--font-display); font-weight: 520; font-size: .98rem; line-height: 1.2; }
+.hero-id b { display: block; font-family: var(--font-display); font-weight: 550; font-size: .98rem; line-height: 1.2; }
 .hero-id small { font-size: .72rem; opacity: .85; letter-spacing: .06em; }
 .hero-tag {
   text-align: right;
@@ -565,7 +589,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   gap: .55rem;
   font-family: var(--font-display);
   font-size: 1.6rem;
-  font-weight: 520;
+  font-weight: 550;
   line-height: 1.15;
 }
 .stat-glass small { font-size: .78rem; opacity: .85; line-height: 1.35; display: block; margin-top: .15rem; }
@@ -619,7 +643,6 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   align-items: center;
   gap: 3rem;
   font-family: var(--font-display);
-  font-style: italic;
   font-size: clamp(1.1rem, 2vw, 1.5rem);
   color: var(--ink-soft);
   white-space: nowrap;
@@ -639,7 +662,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
 .trustbar b {
   display: block;
   font-family: var(--font-display);
-  font-weight: 480;
+  font-weight: 500;
   font-size: clamp(2rem, 4vw, 3.2rem);
   line-height: 1.05;
   letter-spacing: -.02em;
@@ -701,7 +724,6 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
 }
 .pain-quote {
   font-family: var(--font-display);
-  font-style: italic;
   font-size: 1.12rem;
   line-height: 1.4;
   color: var(--ink);
@@ -725,7 +747,6 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
 }
 .pains-more > span:first-child {
   font-family: var(--font-display);
-  font-style: italic;
   color: var(--ink-soft);
   margin-right: .3rem;
 }
@@ -872,7 +893,6 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   font-family: var(--font-display);
-  font-style: italic;
   font-size: 1.05rem;
   color: var(--coral-light);
 }
@@ -906,7 +926,6 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
 .step::before {
   content: "0" counter(step);
   font-family: var(--font-display);
-  font-style: italic;
   font-size: 1rem;
   color: var(--coral-light);
   display: inline-block;
@@ -943,7 +962,6 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   top: .4rem;
   right: 1.4rem;
   font-family: var(--font-display);
-  font-style: italic;
   font-size: 4rem;
   line-height: 1;
   color: var(--coral-soft);
@@ -967,7 +985,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   display: grid;
   place-items: center;
   font-family: var(--font-display);
-  font-weight: 560;
+  font-weight: 600;
   font-size: .92rem;
   color: var(--ink);
   background: var(--coral-soft);
@@ -1004,7 +1022,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
 }
 .review-summary b {
   font-family: var(--font-display);
-  font-weight: 480;
+  font-weight: 500;
   font-size: 4rem;
   line-height: 1;
   color: #FBF6EE;
@@ -1039,7 +1057,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
 .price-card .price {
   font-family: var(--font-display);
   font-size: clamp(2.6rem, 4vw, 3.4rem);
-  font-weight: 480;
+  font-weight: 500;
   color: inherit;
   line-height: 1.05;
   margin: .6rem 0 .2rem;
@@ -1287,7 +1305,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
 .site-footer .footer-heading {
   font-family: var(--font-display);
   font-size: 1.05rem;
-  font-weight: 560;
+  font-weight: 600;
   color: #FBF6EE;
   margin-bottom: .9rem;
 }
@@ -1374,12 +1392,11 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   bottom: -8%;
   z-index: 0;
   font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 480;
+  font-weight: 400;
   font-size: clamp(6rem, 22vw, 17rem);
   line-height: 1;
   letter-spacing: -.04em;
-  color: rgba(58, 58, 46, .05);
+  color: rgba(58, 58, 46, .032);
   pointer-events: none;
   white-space: nowrap;
 }
@@ -1439,7 +1456,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
   transition: transform .25s ease;
 }
 .badge-reviews:hover { transform: translateY(-3px); }
-.badge-reviews .score { font-family: var(--font-display); font-size: 1.5rem; font-weight: 520; }
+.badge-reviews .score { font-family: var(--font-display); font-size: 1.5rem; font-weight: 550; }
 .badge-reviews .stars { color: var(--gold); letter-spacing: 2px; font-size: .9rem; }
 .badge-reviews small { display: block; color: var(--ink-soft); font-size: .78rem; }
 @media (max-width: 860px) {
@@ -1485,7 +1502,6 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
 .video-caption {
   margin-top: .9rem;
   font-family: var(--font-display);
-  font-style: italic;
   font-size: 1.02rem;
   color: var(--ink-soft);
 }
@@ -1561,7 +1577,7 @@ a.stat-glass:hover { background: rgba(255, 253, 248, .14); }
 .map-card b {
   display: block;
   font-family: var(--font-display);
-  font-weight: 560;
+  font-weight: 600;
   font-size: 1.15rem;
   color: var(--ink);
 }
@@ -1579,4 +1595,67 @@ html.js .reveal:not(.is-visible) {
 }
 @media (prefers-reduced-motion: reduce) {
   html.js .reveal:not(.is-visible) { opacity: 1; transform: none; }
+}
+
+/* ═══ Bandeau d'archive (première proposition d'accueil, /accueil-v1) ═══ */
+.archive-banner {
+  background: var(--sage-soft);
+  border-bottom: 1px solid rgba(78, 92, 56, .2);
+  margin-bottom: 1.6rem;
+}
+.archive-banner .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .6rem 1.5rem;
+  padding-block: .85rem;
+}
+.archive-banner p { font-size: .82rem; color: var(--sage-deep); margin: 0; }
+.archive-banner strong { color: var(--sage-deep); }
+.archive-banner a { font-size: .82rem; font-weight: 700; color: var(--coral-deep); white-space: nowrap; }
+
+/* ═══ Densité mobile ═══════════════════════════════════
+   Sur un écran de 390 px, les rythmes verticaux pensés pour le bureau
+   étiraient les pages jusqu'à 14 écrans de scroll pour 1 000 mots.
+   Ce bloc resserre l'espacement et la taille des titres, sans toucher
+   au contenu ni au rendu sur grand écran. */
+@media (max-width: 620px) {
+  section { padding-block: 2.5rem; }
+  .section-head { margin-bottom: 1.6rem; }
+  .section-head p { margin-top: .7rem; font-size: 1rem; }
+
+  h1 { font-size: clamp(2.1rem, 9.5vw, 2.7rem); }
+  h2 { font-size: clamp(1.65rem, 7.6vw, 2.1rem); }
+  h3 { font-size: 1.18rem; }
+  .giant { font-size: clamp(2.2rem, 10.5vw, 3rem); }
+  .lead { font-size: 1.05rem; }
+
+  body { font-size: 1rem; line-height: 1.6; }
+  .eyebrow { font-size: .68rem; padding: .35rem .85rem; margin-bottom: .9rem; }
+
+  .care-card, .price-card, .review, .contact-card { padding: 1.5rem 1.3rem; }
+  .cards-3, .price-cards, .reviews-grid { gap: 1rem; }
+  .chip { padding: .5rem 1rem; font-size: .9rem; }
+  .chips { gap: .5rem; }
+
+  .prose h2 { margin: 1.8rem 0 .7rem; }
+  .prose h3 { margin: 1.3rem 0 .5rem; }
+  .split { gap: 1.8rem; }
+  .steps { gap: .8rem; }
+  .step { padding: 1.2rem 1.1rem; }
+
+  /* les vignettes de partenaires en 16/10 empilées faisaient 2 650 px à elles seules */
+  .partner-img { aspect-ratio: 16 / 7; margin-bottom: .8rem; }
+  .partner-img.is-logo { padding: .7rem; }
+  .card-logo { width: 54px; height: 54px; }
+  .care-card .num { width: 2.2rem; height: 2.2rem; font-size: 1rem; margin-bottom: .9rem; }
+  .care-card ul { margin-bottom: 1rem; }
+  .care-card li { font-size: .9rem; margin-bottom: .35rem; }
+
+  .page-hero { padding-block: 2rem 2.2rem; }
+  .page-hero .hero-grid { gap: 1.6rem; }
+  .trustbar { padding-block: 2.2rem 0; }
+  .cta-final { padding-block: 2.4rem; }
+  .btn { padding: .85rem 1.4rem; font-size: .95rem; }
 }
